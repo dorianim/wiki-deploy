@@ -1,0 +1,30 @@
+name: 'Deploy Wiki'
+
+on:
+  push:
+    branches: [main]
+    paths: [/wiki]
+    
+jobs:
+  deploy-wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository }}
+          path: repo
+          submodules: false
+          
+      - name: Copy wiki
+        run: |
+          cp -r repo/wiki wiki
+          
+      - name: Push wiki
+        run: |
+          cd wiki
+          git init
+          git config --global user.name 'Wiki Pusher'
+          git config --global user.email 'actions@github.com'
+          git commit -am "Update wiki"
+          git push
