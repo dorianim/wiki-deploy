@@ -30,6 +30,7 @@ jobs:
           
           git init
           git remote add origin https://github.com/dorianim/wiki-deploy.wiki.git
+
           git add --all -f
           git commit -am "Update wiki"
-          git push -f
+          git push --set-upstream origin main -f
