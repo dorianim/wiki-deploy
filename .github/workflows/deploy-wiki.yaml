@@ -24,14 +24,17 @@ jobs:
         run: |
           cp -r repo/wiki wiki
         
-      # The public key for this key is a deploy key in the server repo
-      - name: Setup SSH Key
+        
+      - name: Prepare environment
         run: |
           echo "SSH_AUTH_SOCK=/tmp/ssh_agent.sock" >> $GITHUB_ENV
           export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" 
           echo "GIT_SSH_COMMAND=$GIT_SSH_COMMAND" >> $GITHUB_ENV
-          
-          ssh-agent -a "/tmp/ssh_agent.sock" > /dev/null
+        
+      # The public key for this key is a deploy key in the server repo
+      - name: Setup SSH Key
+        run: |
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
           ssh-add - <<< "${{ secrets.REPO_SSH_KEY }}"
         
       - name: Push wiki
