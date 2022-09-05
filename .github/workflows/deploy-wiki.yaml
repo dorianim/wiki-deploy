@@ -31,7 +31,7 @@ jobs:
           export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" 
           echo "GIT_SSH_COMMAND=$GIT_SSH_COMMAND" >> $GITHUB_ENV
           
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-agent -a "/tmp/ssh_agent.sock" > /dev/null
           ssh-add - <<< "${{ secrets.REPO_SSH_KEY }}"
         
       - name: Push wiki
