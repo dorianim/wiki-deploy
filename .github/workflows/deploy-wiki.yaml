@@ -24,8 +24,11 @@ jobs:
       - name: Push wiki
         run: |
           cd wiki
-          git init
+          git config --global init.defaultBranch main
           git config --global user.name 'Wiki Pusher'
           git config --global user.email 'actions@github.com'
+          
+          git init
+          git add --all -f
           git commit -am "Update wiki"
           git push
