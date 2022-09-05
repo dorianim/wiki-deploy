@@ -2,12 +2,13 @@ name: 'Deploy Wiki'
 
 on:
   push:
-    branches: [main]
-    paths: [/wiki]
-  workflow_dispatch:
+    branches: 
+      - 'main'
+    paths: 
+      - '/wiki'
     
 permissions:
-  contents: write
+  contents: read
     
 jobs:
   deploy-wiki:
