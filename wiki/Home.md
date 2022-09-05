@@ -1,3 +1,3 @@
 # Wiki home
 
-This is a simple home page
+This is a simple home page.
